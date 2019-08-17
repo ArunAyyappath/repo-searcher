@@ -12,10 +12,11 @@ class GithubSearcher
   private
 
   def client
-    @client ||= Octokit::Client.new(access_token: token)
+    @client ||= Octokit::Client.new(access_token: access_token)
   end
 
-  def token
-    ENV['GH_ACCESS_TOKEN']
+  def access_token
+    @access_token ||=
+      YAML.load_file('./secrets.yml')['ACCESS_TOKEN']
   end
 end
