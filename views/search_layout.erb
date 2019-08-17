@@ -1,0 +1,7 @@
+<h1> Welcome to RepoSearcher </h1>
+<form action="/results" method="post">
+  Enter a search term: <input type="text" name="keyword" value="<%= @search_term %>"/>
+<input type="submit" value="Submit" />
+</form>
+
+<%= yield if block_given? %>

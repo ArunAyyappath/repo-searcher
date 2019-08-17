@@ -1,14 +1,16 @@
 require 'sinatra'
 require 'octokit'
+require './lib/github_searcher'
+require 'pry'
 
 class RepoSearcher < Sinatra::Base
   get '/' do
-    %q{
-        <h1> Welcome to RepoSearcher </h1>
-        <form method="post">
-        Enter a search term: <input type="text" name="term" />
-        <input type="submit" value="submit" />
-        </form>
-    }
+    erb :search_layout
+  end
+
+  post '/results' do
+    @search_term = params[:keyword]
+    @results = GithubSearcher.new(keyword: @search_term).search
+    erb :results, layout: :search_layout
   end
 end
