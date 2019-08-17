@@ -1,2 +1,15 @@
-<h1> Results </h1>
-<%= @results[:items].count %>
+<h1> <%= @results[:items].count %> repos found! </h1>
+<table>
+  <tr>
+    <th> Name </th>
+    <th> Owner </th>
+    <th> Url </th>
+  </tr>
+<% @results[:items].each do |repo| %>
+  <tr>
+    <td><%= repo[:name] %></td>
+    <td><%= repo[:owner][:login] %></td>
+    <td><a href=<%= repo[:html_url] %>><%= repo[:full_name] %></td>
+  </tr>
+<% end %>
+</table>
